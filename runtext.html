@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .bg {
+            background-image: url(bg.png);
+            width: 100%;
+            height: auto;
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        .row {
+            display: inline-block;
+            margin: 0 auto;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .font_sz {
+            fill: green;
+            font-size: 100px;
+            font-weight: bold;
+            font-size: 50px;
+
+        }
+
+        @media screen and (max-width:700px) {
+            .font_sz {
+                font-size: 28px;
+            }
+
+        }
+    </style>
+    <script>
+        (function () {
+
+            function init() {
+                var canvas = document.getElementsByTagName('canvas')[0];
+                var ctx = canvas.getContext('2d');
+                ctx.fillStyle = 'hsl(25,100%,50%)';
+
+                ctx.font = 'normal bold 2em "Lucida Console"';
+                var text = '母親節快樂愿您永遠健康笑容滿懷';
+
+                var i = 1;
+                function draw() {
+
+                    i++;
+                    if (i > 5) {
+                        ctx.fillText(text.substr(5, i - 5), 40, 450);
+                    } else {
+                        ctx.fillText(text.substr(0, i), 120, 400);
+                    }
+
+                }
+                setInterval(function () {
+                    if (i < text.length) {
+                        requestAnimationFrame(draw);
+                    }
+                }, 500);
+
+            }
+
+            //invoke function init once document is fully loaded
+            window.addEventListener('load', init, false);
+        }()); //self invoking function
+
+    </script>
+
+</head>
+
+<body class="bg" onresize="resize()">
+    <div class="row">
+        <svg height="200" width="100%">
+            <defs>
+                <path id="MyPath" d="M150 50 C450 350 1500 0 1000 20 " />
+            </defs>
+            <text x="120" y="120" class="font_sz">
+                <textPath xlink:href="#MyPath">
+                    媽媽 我愛您
+                </textPath>
+            </text>
+        </svg>
+    </div>
+    <canvas id="canvas" width="400" height="500"></canvas>
+</body>
+
+</html>
